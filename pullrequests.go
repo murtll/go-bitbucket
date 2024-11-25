@@ -2,6 +2,7 @@ package bitbucket
 
 import (
 	"encoding/json"
+	"log"
 	"net/url"
 )
 
@@ -15,6 +16,7 @@ func (p *PullRequests) Create(po *PullRequestsOptions) (interface{}, error) {
 		return nil, err
 	}
 	urlStr := p.c.requestUrl("/projects/%s/repos/%s/pull-requests/", po.Project, po.RepoSlug)
+  log.Printf("sending '%s' to '%s'", data, urlStr)
 	return p.c.executeWithContext("POST", urlStr, data, po.ctx)
 }
 
@@ -104,6 +106,7 @@ func (p *PullRequests) Merge(po *PullRequestsOptions) (interface{}, error) {
 		return nil, err
 	}
 	urlStr := p.c.GetApiBaseURL() + "/projects/" + po.Project + "/repos/" + po.RepoSlug + "/pull-requests/" + po.ID + "/merge"
+  log.Printf("sending '%s' to '%s'", data, urlStr)
 	return p.c.executeWithContext("POST", urlStr, data, po.ctx)
 }
 
