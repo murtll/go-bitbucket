@@ -218,11 +218,16 @@ func (p *PullRequests) buildPullRequestBody(po *PullRequestsOptions) (string, er
 	if po.SourceBranch != "" {
 		body["fromRef"].(map[string]interface{})["displayId"] = po.SourceBranch
 		body["fromRef"].(map[string]interface{})["id"] = "/refs/heads/" + po.SourceBranch
-		body["toRef"].(map[string]interface{})["repository"] = map[string]interface{}{"name": po.SourceRepository}
 	}
 
 	if po.SourceRepository != "" {
-		body["fromRef"].(map[string]interface{})["repository"] = map[string]interface{}{"name": po.SourceRepository}
+		body["fromRef"].(map[string]interface{})["repository"] = map[string]interface{}{
+      "name": po.SourceRepository,
+      "project": map[string]interface{}{
+        "key": po.Project,
+      },
+      "slug": po.SourceRepository,
+    }
 	}
 
 	if po.DestinationBranch != "" {
@@ -231,7 +236,13 @@ func (p *PullRequests) buildPullRequestBody(po *PullRequestsOptions) (string, er
 	}
 
 	if po.DestinationRepository != "" {
-		body["toRef"].(map[string]interface{})["repository"] = map[string]interface{}{"name": po.DestinationRepository}
+		body["toRef"].(map[string]interface{})["repository"] = map[string]interface{}{
+      "name": po.DestinationRepository,
+      "project": map[string]interface{}{
+        "key": po.Project,
+      },
+      "slug": po.DestinationRepository,
+    }
 	}
 
 	if po.Title != "" {
