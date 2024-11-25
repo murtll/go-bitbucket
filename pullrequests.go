@@ -217,7 +217,7 @@ func (p *PullRequests) buildPullRequestBody(po *PullRequestsOptions) (string, er
 
 	if po.SourceBranch != "" {
 		body["fromRef"].(map[string]interface{})["displayId"] = po.SourceBranch
-		body["fromRef"].(map[string]interface{})["id"] = "/refs/heads/" + po.SourceBranch
+		body["fromRef"].(map[string]interface{})["id"] = "refs/heads/" + po.SourceBranch
 	}
 
 	if po.SourceRepository != "" {
@@ -232,7 +232,7 @@ func (p *PullRequests) buildPullRequestBody(po *PullRequestsOptions) (string, er
 
 	if po.DestinationBranch != "" {
 		body["toRef"].(map[string]interface{})["displayId"] = po.DestinationBranch
-		body["toRef"].(map[string]interface{})["id"] = "/refs/heads/" + po.DestinationBranch
+		body["toRef"].(map[string]interface{})["id"] = "refs/heads/" + po.DestinationBranch
 	}
 
 	if po.DestinationRepository != "" {
