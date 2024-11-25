@@ -6,15 +6,14 @@ import (
 
 	_ "github.com/k0kubun/pp"
 
-	"github.com/ktrysmt/go-bitbucket"
+	"github.com/murtll/go-bitbucket"
 )
 
 func TestGetRepositoryRepositories(t *testing.T) {
-
 	user := os.Getenv("BITBUCKET_TEST_USERNAME")
 	pass := os.Getenv("BITBUCKET_TEST_PASSWORD")
-	owner := os.Getenv("BITBUCKET_TEST_OWNER")
 	repo := os.Getenv("BITBUCKET_TEST_REPOSLUG")
+	proj := os.Getenv("BITBUCKET_TEST_PROJECT")
 
 	if user == "" {
 		t.Error("BITBUCKET_TEST_USERNAME is empty.")
@@ -22,18 +21,18 @@ func TestGetRepositoryRepositories(t *testing.T) {
 	if pass == "" {
 		t.Error("BITBUCKET_TEST_PASSWORD is empty.")
 	}
-	if owner == "" {
-		t.Error("BITBUCKET_TEST_OWNER is empty.")
-	}
 	if repo == "" {
 		t.Error("BITBUCKET_TEST_REPOSLUG is empty.")
+	}
+	if proj == "" {
+		t.Error("BITBUCKET_TEST_PROJECT is empty.")
 	}
 
 	c := bitbucket.NewBasicAuth(user, pass)
 
 	opt := &bitbucket.RepositoryOptions{
-		Owner:    owner,
 		RepoSlug: repo,
+    Project: proj,
 	}
 
 	res, err := c.Repositories.Repository.Get(opt)
@@ -41,8 +40,8 @@ func TestGetRepositoryRepositories(t *testing.T) {
 		t.Error("The repository is not found.")
 	}
 
-	if res.Full_name != owner+"/"+repo {
-		t.Error("Cannot catch repos full name.")
+	if res.Name != repo {
+    t.Error("Cannot catch repos name.")
 	}
 }
 

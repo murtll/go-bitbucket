@@ -299,7 +299,7 @@ func (r *Repository) Fork(fo *RepositoryForkOptions) (*Repository, error) {
 }
 
 func (r *Repository) Get(ro *RepositoryOptions) (*Repository, error) {
-	urlStr := r.c.requestUrl("/repositories/%s/%s", ro.Owner, ro.RepoSlug)
+	urlStr := r.c.requestUrl("/projects/%s/repos/%s", ro.Project, ro.RepoSlug)
 	response, err := r.c.execute("GET", urlStr, "")
 	if err != nil {
 		return nil, err

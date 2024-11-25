@@ -298,23 +298,23 @@ type RepositoryTagTarget struct {
 }
 
 type PullRequestsOptions struct {
-	ID                string   `json:"id"`
-	CommentID         string   `json:"comment_id"`
-	Owner             string   `json:"owner"`
-	RepoSlug          string   `json:"repo_slug"`
-	Title             string   `json:"title"`
-	Description       string   `json:"description"`
-	CloseSourceBranch bool     `json:"close_source_branch"`
-	SourceBranch      string   `json:"source_branch"`
-	SourceRepository  string   `json:"source_repository"`
-	DestinationBranch string   `json:"destination_branch"`
-	DestinationCommit string   `json:"destination_repository"`
-	Message           string   `json:"message"`
-	Reviewers         []string `json:"reviewers"`
-	States            []string `json:"states"`
-	Query             string   `json:"query"`
-	Sort              string   `json:"sort"`
-	ctx               context.Context
+	ID                    string   `json:"id"`
+	CommentID             string   `json:"comment_id"`
+	Project               string   `json:"project"`
+	RepoSlug              string   `json:"repo_slug"`
+	Title                 string   `json:"title"`
+	Description           string   `json:"description"`
+	CloseSourceBranch     bool     `json:"close_source_branch"`
+	SourceBranch          string   `json:"source_branch"`
+	SourceRepository      string   `json:"source_repository"`
+	DestinationBranch     string   `json:"destination_branch"`
+	DestinationRepository string   `json:"destination_repository"`
+	Message               string   `json:"message"`
+	Reviewers             []string `json:"reviewers"`
+	States                []string `json:"states"`
+	Query                 string   `json:"query"`
+	Sort                  string   `json:"sort"`
+	ctx                   context.Context
 }
 
 func (po *PullRequestsOptions) WithContext(ctx context.Context) *PullRequestsOptions {
@@ -665,8 +665,8 @@ func (dk *DeployKeyOptions) WithContext(ctx context.Context) *DeployKeyOptions {
 }
 
 type SSHKeyOptions struct {
-	Owner    string `json:"owner"`
-	Uuid     string `json:"uuid"`
-	Label    string `json:"label"`
-	Key      string `json:"key"`
+	Owner string `json:"owner"`
+	Uuid  string `json:"uuid"`
+	Label string `json:"label"`
+	Key   string `json:"key"`
 }
